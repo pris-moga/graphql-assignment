@@ -18,14 +18,9 @@ const People = () => {
     <div>
       {data.people.length > 0 && <AddCar />}
       <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
-        {data.people.map(({ id, firstName, lastName, cars }) => (
+        {data.people.map(({ id, firstName, lastName }) => (
           <List.Item key={id}>
-            <PersonCard
-              id={id}
-              firstName={firstName}
-              lastName={lastName}
-              cars={cars}
-            />
+            <PersonCard id={id} firstName={firstName} lastName={lastName} />
           </List.Item>
         ))}
       </List>

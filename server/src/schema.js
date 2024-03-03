@@ -109,11 +109,19 @@ type Cars {
     personId: String!
 }
 
+type PersonWithCars {
+  person: People
+  cars:[Cars]
+}
+
+
 type Query {
-    person(id: String!): People
-    people:[People]
-    cars:[Cars]
-    carsforPerson(personId: String!): [Cars]
+  person(id: String!): People
+  people: [People]  
+  car(id: String!): Cars
+  cars: [Cars]
+  carsByPersonId(personId: String!): [Cars]
+  personWithCars(id: String!): PersonWithCars
 }
 
 type Mutation {
@@ -134,8 +142,21 @@ const resolvers = {
       return find(peopleArr, { id: args.id });
     },
     cars: () => carsArr,
-    carsforPerson(root, args) {
+    /* carsforPerson(root, args) {
       return carsArr.filter((car) => car.personId === args.personId);
+    }, */
+    personWithCars(root, args) {
+      const person = find(peopleArr, { id: args.id });
+      if (!person) {
+        throw new Error(`Couldn't find person with id ${args.id}`);
+      }
+
+      const personCars = carsArr.filter((car) => car.personId === args.id);
+
+      return {
+        person,
+        cars: personCars,
+      };
     },
   },
 

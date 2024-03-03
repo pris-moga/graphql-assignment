@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import {
   ADD_CAR,
   GET_CARS,
-  GET_CARSFORPERSON,
+  //GET_CARSFORPERSON,
   GET_PEOPLE,
 } from "../../graphql/queries";
 
@@ -54,7 +54,7 @@ const AddCar = () => {
             cars: [...existingCars, newCar],
           },
         });
-        const existing = cache.readQuery({
+        /* const existing = cache.readQuery({
           query: GET_CARSFORPERSON,
           variables: { personId },
         });
@@ -65,7 +65,7 @@ const AddCar = () => {
           data: {
             carsforPerson: [...existingCars1, addCar],
           },
-        });
+        }); */
       },
     });
   };

@@ -59,14 +59,7 @@ const UpdatePerson = (props) => {
       </Form.Item>
       <Form.Item shouldUpdate={true}>
         {() => (
-          <Button
-            type="primary"
-            htmlType="submit"
-            // disabled={
-            //     (!form.isFieldTouched('firstName') && !form.isFieldTouched('lastName')) ||
-            //     form.getFieldsError().filter(({errors}) => errors.length).length
-            // }
-          >
+          <Button type="primary" htmlType="submit">
             Update Person
           </Button>
         )}
