@@ -7,10 +7,22 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import FormItem from "antd/es/form/FormItem";
 
 const CarCard = ({ id, year, make, model, price }) => {
-  const [removeCar] = useMutation(REMOVE_CAR);
   const [updateCar] = useMutation(UPDATE_CAR);
   const [editMode, setEditMode] = useState(false);
   const [carData, setCarData] = useState({ year, make, model, price });
+  const [removeCar] = useMutation(REMOVE_CAR, {
+    update(cache, { data: { removeCar } }) {
+      cache.modify({
+        fields: {
+          cars(existingCars = [], { readField }) {
+            return existingCars.filter(
+              (carRef) => id !== readField("id", carRef)
+            );
+          },
+        },
+      });
+    },
+  });
 
   const handleRemove = () => {
     removeCar({ variables: { id } });
