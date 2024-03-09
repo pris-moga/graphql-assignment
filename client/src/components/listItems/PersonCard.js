@@ -13,8 +13,6 @@ const PersonCard = (props) => {
   const styles = getStyles();
   const { id, firstName, lastName } = props;
 
-  console.log(id);
-
   const { loading, error, data, refetch } = useQuery(GET_PERSON_WITH_CARS, {
     variables: { personId: id },
   });
@@ -51,7 +49,10 @@ const PersonCard = (props) => {
             <CarCard key={car.id} {...car} />
           ))}
 
-          <Link to={`/learn-more/${id}`}> Learn More</Link>
+          <Link to={`/learn-more/${id}`} target="_blank">
+            {" "}
+            Learn More
+          </Link>
         </Card>
       )}
     </div>

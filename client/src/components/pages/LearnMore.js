@@ -1,18 +1,21 @@
 import { useQuery } from "@apollo/client";
 import { useParams, useHistory } from "react-router-dom";
-import { GET_PEOPLE } from "../../graphql/queries";
+import { GET_PERSON_WITH_CARS } from "../../graphql/queries";
 import { Button } from "antd";
 
 const LearnMore = () => {
   const { personId } = useParams();
   const history = useHistory();
 
-  const { loading, error, data } = useQuery(GET_PEOPLE);
+  const { loading, error, data } = useQuery(GET_PERSON_WITH_CARS, {
+    variables: { personId },
+  });
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  const person = data.people.find((p) => p.id === personId);
+  const { personWithCars } = data;
+  const { person, cars } = personWithCars;
 
   const handleGoBack = () => {
     history.push("/");
@@ -23,7 +26,7 @@ const LearnMore = () => {
       <h1>{`${person.firstName} ${person.lastName}`}</h1>
       <h2>Cars:</h2>
       <ul>
-        {person.cars.map((car) => (
+        {cars.map((car) => (
           <li
             key={car.id}
           >{`${car.year} ${car.make} ${car.model} - $${car.price}`}</li>
