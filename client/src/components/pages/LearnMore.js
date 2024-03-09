@@ -5,7 +5,7 @@ import { Button } from "antd";
 
 const LearnMore = () => {
   const { personId } = useParams();
-  const history = useHistory();
+  //const history = useHistory();
 
   const { loading, error, data } = useQuery(GET_PERSON_WITH_CARS, {
     variables: { personId },
@@ -18,7 +18,7 @@ const LearnMore = () => {
   const { person, cars } = personWithCars;
 
   const handleGoBack = () => {
-    history.push("/");
+    //history.push("/");
   };
 
   return (

@@ -49,10 +49,7 @@ const PersonCard = (props) => {
             <CarCard key={car.id} {...car} />
           ))}
 
-          <Link to={`/learn-more/${id}`} target="_blank">
-            {" "}
-            Learn More
-          </Link>
+          <Link to={`/learn-more/${id}`}>Learn More</Link>
         </Card>
       )}
     </div>
